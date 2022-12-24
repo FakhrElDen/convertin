@@ -16,8 +16,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        
-        return view('tasks');
+        $tasks = Task::with(['admin', 'user'])->get();
+        return view('tasks', compact('tasks'));
     }
 
     /**
@@ -49,12 +49,18 @@ class TaskController extends Controller
             'description' => 'required',
         ]);
         Task::create($task);
+        User::where('id', $request->assigned_to_id)->increment('tasks_number');
         return redirect(route('tasks'));
     }
 
     public function statistics()
     {
-        
+        $users = User::role('user')
+            ->where('tasks_number', '>', 0)
+            ->orderBy('tasks_number', 'asc')
+            ->with('userTasks')
+            ->get();
+        return view('statistics', compact('users'));
     }
 
     /**

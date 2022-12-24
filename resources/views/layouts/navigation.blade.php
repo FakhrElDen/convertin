@@ -12,14 +12,11 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('statistics')">
-                        {{ __('Statistics') }}
-                    </x-nav-link>
                     <x-nav-link :href="route('tasks')">
                         {{ __('Tasks') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('create-task')">
-                        {{ __('Create Task') }}
+                    <x-nav-link :href="route('statistics')">
+                        {{ __('Statistics') }}
                     </x-nav-link>
                 </div>
             </div>
